@@ -79,7 +79,7 @@ function MainApp() {
 
 export default function Router() {
   return (
-    <Stack.Navigator initialRouteName="Search">
+    <Stack.Navigator initialRouteName="Splash">
       {StackScreen.map((screen, index) => (
         <Stack.Screen
           key={index}
