@@ -32,12 +32,13 @@ const styles = StyleSheet.create({
   card_title: {
     color: color.lightGray,
     fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
     textAlign: "center",
   },
   card_subtitle: {
     color: color.lightGray,
     fontSize: windowWidth * 0.03,
+    fontFamily: "Outfit-Regular",
     textAlign: "center",
   },
 });
