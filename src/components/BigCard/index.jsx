@@ -26,7 +26,12 @@ export default function BigCard({ navigation }) {
               color={color.red}
             />
           </Pressable>
-          <Image style={styles.image} />
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
+            }}
+          />
         </View>
         <View style={styles.card_body}>
           <View>

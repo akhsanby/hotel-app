@@ -4,11 +4,9 @@ import { StyleSheet } from "react-native";
 import { color } from "../../utils";
 
 const styles = StyleSheet.create({
-  container: (props) => ({
+  container: {
     position: "relative",
-    marginTop: props.marginTop ?? 50,
-    marginBottom: props.marginBottom ?? 20,
-  }),
+  },
   icon: (pressed) => ({
     position: "absolute",
     zIndex: 1,
@@ -23,8 +21,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.whitePrimary,
     paddingVertical: 10,
     paddingLeft: 50,
-    paddingHorizontal: 15,
+    // paddingHorizontal: 15,
     borderRadius: 50,
+    fontFamily: "Outfit-Regular",
   },
 });
 

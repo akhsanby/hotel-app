@@ -1,6 +1,15 @@
 import React, { useEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 
+// components
+import Gap from "../../components/Gap";
+
+// icons
+import { FontAwesome5 } from "@expo/vector-icons";
+
+// utils
+import { color, windowWidth } from "../../utils";
+
 export default function Splash({ navigation }) {
   useEffect(() => {
     setTimeout(() => {
@@ -10,7 +19,9 @@ export default function Splash({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Welcome To App</Text>
+      <FontAwesome5 name="hotel" size={windowWidth * 0.2} color={color.red} />
+      <Gap height={10} />
+      <Text style={styles.text}>Hotel Booking</Text>
     </View>
   );
 }
@@ -22,6 +33,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text: {
-    color: "red",
+    color: color.whitePrimary,
+    fontSize: windowWidth * 0.05,
+    fontFamily: "Outfit-Bold",
   },
 });

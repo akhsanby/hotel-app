@@ -14,7 +14,7 @@ export default function TabItem({ label, isFocused, onPress, onLongPress }) {
           color={isFocused ? "#e80151" : "#ffffff"}
         />
       );
-    if (label === "Favourite")
+    if (label === "My Favourite")
       return (
         <FontAwesome
           name="heart"
@@ -22,7 +22,7 @@ export default function TabItem({ label, isFocused, onPress, onLongPress }) {
           color={isFocused ? "#e80151" : "#ffffff"}
         />
       );
-    if (label === "History")
+    if (label === "History Booking")
       return (
         <FontAwesome5
           name="history"

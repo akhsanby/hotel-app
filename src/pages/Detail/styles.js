@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
   title: {
     color: color.whitePrimary,
     fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
   },
   subtitle: {
     color: color.whitePrimary,
@@ -20,10 +20,12 @@ const styles = StyleSheet.create({
     borderTopColor: color.lightGray,
     borderWidth: 2,
     paddingTop: 8,
+    fontFamily: "Outfit-Regular",
   },
   description: {
     color: color.whitePrimary,
     fontSize: windowWidth * 0.035,
+    fontFamily: "Outfit-Regular",
   },
   icon_star_wrapper: {
     flexDirection: "row",
@@ -33,46 +35,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   text_price: {
-    backgroundColor: color.red,
-    paddingHorizontal: 20,
     paddingVertical: 5,
     borderRadius: 10,
     color: color.whitePrimary,
     fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
   },
   btn_wrapper: {
     flexDirection: "row",
     justifyContent: "space-around",
     alignItems: "center",
-    marginVertical: 20,
+    marginVertical: 10,
   },
-  btn_back: (pressed) => ({
-    borderColor: pressed ? color.red : color.whitePrimary,
-    borderWidth: 2,
-    paddingHorizontal: 30,
-    paddingVertical: 10,
-    borderRadius: 10,
-  }),
   btn_booking: (pressed) => ({
+    width: "50%",
     borderColor: pressed ? color.red : color.whitePrimary,
     borderWidth: 2,
     paddingHorizontal: 30,
     paddingVertical: 10,
     borderRadius: 10,
-  }),
-  text_back: (pressed) => ({
-    color: pressed ? color.red : color.whitePrimary,
-    fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
   }),
   text_booking: (pressed) => ({
     color: pressed ? color.red : color.whitePrimary,
     fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
+    textAlign: "center",
   }),
   text_facility: {
     color: color.whitePrimary,
+    fontFamily: "Outfit-Regular",
   },
 });
 

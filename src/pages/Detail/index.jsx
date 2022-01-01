@@ -15,7 +15,7 @@ import { color, windowWidth } from "../../utils";
 // styles
 import styles from "./styles";
 
-export default function Detail() {
+export default function Detail({ navigation }) {
   const facilities = [
     { text: "Parking", nameIcon: "parking" },
     { text: "Wifi", nameIcon: "wifi" },
@@ -23,11 +23,20 @@ export default function Detail() {
     { text: "24 h support", nameIcon: "headset" },
   ];
 
+  const handleRedirectToBookingPage = () => {
+    return navigation.navigate("Booking");
+  };
+
   return (
     <Fragment>
-      <Image style={styles.image} />
+      <Image
+        style={styles.image}
+        source={{
+          uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
+        }}
+      />
       <ScrollView>
-        <Layout paddingHorizontal={20}>
+        <Layout>
           {/* section hotel name */}
           <View>
             <Text style={styles.title}>
@@ -85,15 +94,16 @@ export default function Detail() {
             </ScrollView>
           </View>
           {/* end section facilities */}
+          <Gap height={10} />
         </Layout>
       </ScrollView>
 
       {/* section button */}
       <View style={styles.btn_wrapper}>
-        <Pressable style={({ pressed }) => styles.btn_back(pressed)}>
-          {({ pressed }) => <Text style={styles.text_back(pressed)}>Back</Text>}
-        </Pressable>
-        <Pressable style={({ pressed }) => styles.btn_booking(pressed)}>
+        <Pressable
+          style={({ pressed }) => styles.btn_booking(pressed)}
+          onPress={handleRedirectToBookingPage}
+        >
           {({ pressed }) => (
             <Text style={styles.text_booking(pressed)}>Book Now</Text>
           )}

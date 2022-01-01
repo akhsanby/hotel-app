@@ -10,15 +10,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   heading: {
-    color: color.lightGray,
+    color: color.whitePrimary,
     marginBottom: 30,
     textAlign: "center",
     fontSize: windowWidth * 0.05,
-    fontWeight: "bold",
+    fontFamily: "Outfit-Bold",
   },
   subheading: {
-    color: color.lightGray,
-    fontSize: windowWidth * 0.045,
+    color: color.whitePrimary,
+    fontFamily: "Outfit-Bold",
+    fontSize: windowWidth * 0.05,
     paddingBottom: 6,
   },
 });

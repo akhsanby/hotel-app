@@ -1,35 +1,26 @@
 import { StyleSheet } from "react-native";
 
 // utils
-import { color, windowWidth, windowHeight } from "../../utils";
+import { color, windowHeight, windowWidth } from "../../utils";
 
 const styles = StyleSheet.create({
   card: {
-    marginBottom: windowHeight * 0.02,
-    flexDirection: "row",
+    width: windowWidth * 0.4,
+    marginVertical: 15,
   },
   image: {
-    backgroundColor: color.whitePrimary,
-    width: windowWidth * 0.25,
-    height: windowWidth * 0.25,
-    borderRadius: 10,
+    width: "100%",
+    height: windowHeight * 0.22,
+    borderRadius: 15,
   },
   card_body: {
-    paddingLeft: 10,
-    flex: 1,
+    paddingVertical: 5,
   },
-  text_name: {
+  card_title: {
     color: color.whitePrimary,
     fontSize: windowWidth * 0.04,
-    fontWeight: "bold",
-  },
-  text_location: {
-    color: color.whitePrimary,
-    fontSize: windowWidth * 0.03,
-  },
-  star_icons: {
-    flexDirection: "row",
-    marginTop: windowHeight * 0.02,
+    fontFamily: "Outfit-Regular",
+    textAlign: "center",
   },
 });
 

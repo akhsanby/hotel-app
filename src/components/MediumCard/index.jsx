@@ -1,41 +1,31 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
-
-// icons
-import { AntDesign } from "@expo/vector-icons";
-
-// utils
-import { color, windowWidth } from "../../utils";
+import { Text, View, Image, Pressable } from "react-native";
 
 // styles
 import styles from "./styles";
 
-export default function MediumCard() {
+export default function MediumCard({ navigation }) {
+  const handleNavigateToDetail = () => {
+    return navigation.navigate("Detail");
+  };
+
   return (
-    <View style={styles.card}>
-      <Image style={styles.image} />
-      <View style={styles.card_body}>
-        <Text ellipsizeMode="tail" numberOfLines={1} style={styles.text_name}>
-          Lorem ipsum dolor sit.
-        </Text>
-        <Text
-          ellipsizeMode="tail"
-          numberOfLines={1}
-          style={styles.text_location}
-        >
-          Lorem ipsum dolor sit amet.
-        </Text>
-        <View style={styles.star_icons}>
-          {[1, 2, 3, 4, 5].map((index) => (
-            <AntDesign
-              key={index}
-              name="star"
-              size={windowWidth * 0.04}
-              color={color.orange}
-            />
-          ))}
+    <Pressable onPress={handleNavigateToDetail}>
+      {({ pressed }) => (
+        <View style={styles.card}>
+          <Image
+            style={styles.image}
+            source={{
+              uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
+            }}
+          />
+          <View style={styles.card_body}>
+            <Text style={styles.card_title} numberOfLines={2}>
+              Lorem ipsum dolor sit amet consectetur.
+            </Text>
+          </View>
         </View>
-      </View>
-    </View>
+      )}
+    </Pressable>
   );
 }

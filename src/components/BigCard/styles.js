@@ -30,13 +30,13 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   card_title: {
-    color: color.lightGray,
+    color: color.whitePrimary,
     fontSize: windowWidth * 0.05,
     fontFamily: "Outfit-Bold",
     textAlign: "center",
   },
   card_subtitle: {
-    color: color.lightGray,
+    color: color.whitePrimary,
     fontSize: windowWidth * 0.03,
     fontFamily: "Outfit-Regular",
     textAlign: "center",

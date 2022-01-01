@@ -2,17 +2,16 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 
 // utils
-import { windowWidth } from "../../utils";
+import { windowWidth, windowHeight } from "../../utils";
 
-export default function Layout(props) {
-  return <View style={styles.container(props)}>{props.children}</View>;
+export default function Layout({ flex, children }) {
+  return <View style={styles.container(flex)}>{children}</View>;
 }
 
 const styles = StyleSheet.create({
-  container: (props) => ({
-    width: windowWidth,
-    paddingHorizontal: props.paddingHorizontal ?? 30,
-    paddingTop: props.paddingTop ?? 30,
-    paddingBottom: props.paddingBottom ?? 30,
+  container: (flex) => ({
+    flex: flex ? flex : null,
+    paddingHorizontal: windowWidth * 0.05,
+    paddingTop: windowHeight * 0.02,
   }),
 });

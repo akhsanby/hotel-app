@@ -10,9 +10,9 @@ import { color } from "../../utils";
 // styles
 import styles from "./styles";
 
-export default function SearchForm(props) {
+export default function SearchForm() {
   return (
-    <View style={styles.container(props)}>
+    <View style={styles.container}>
       <Pressable style={({ pressed }) => styles.icon(pressed)}>
         {({ pressed }) => (
           <AntDesign
