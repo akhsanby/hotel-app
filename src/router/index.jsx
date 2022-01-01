@@ -30,8 +30,12 @@ const TabScreens = [
     name: "Favourite",
     component: FavouriteScreen,
     options: {
+      title: "My Favourite",
       headerStyle: {
         backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
       },
       headerTintColor: color.whitePrimary,
     },
@@ -40,8 +44,12 @@ const TabScreens = [
     name: "History",
     component: HistoryScreen,
     options: {
+      title: "History Booking",
       headerStyle: {
         backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
       },
       headerTintColor: color.whitePrimary,
     },
@@ -52,6 +60,9 @@ const TabScreens = [
     options: {
       headerStyle: {
         backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
       },
       headerTintColor: color.whitePrimary,
     },
@@ -73,8 +84,12 @@ const StackScreen = [
     name: "Detail",
     component: DetailScreen,
     options: {
+      title: "Detail Hotel",
       headerStyle: {
         backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
       },
       headerTintColor: color.whitePrimary,
     },
@@ -93,8 +108,12 @@ const StackScreen = [
     name: "EditProfile",
     component: EditProfileScreen,
     options: {
+      title: "Edit Profile",
       headerStyle: {
         backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
       },
       headerTintColor: color.whitePrimary,
     },
@@ -102,7 +121,16 @@ const StackScreen = [
   {
     name: "Booking",
     component: BookingScreen,
-    options: { headerShown: false },
+    options: {
+      title: "Booking Now",
+      headerStyle: {
+        backgroundColor: color.blackSecondary,
+      },
+      headerTitleStyle: {
+        fontFamily: "Outfit-Bold",
+      },
+      headerTintColor: color.whitePrimary,
+    },
   },
   {
     name: "MainApp",
