@@ -8,6 +8,13 @@ adalah link ke halaman yang menyediakan berbagai sumber API yang bisa kamu manfa
 ## Tools & Library
 
 1. React Native (Expo)
+2. React Navigation
+3. @expo/vector-icons
+4. expo-font
+5. expo-status-bar
+6. expo-app-loading
+7. react-native-svg
+8. react-native-modal-datetime-picker
 
 ## API
 
