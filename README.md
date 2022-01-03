@@ -18,4 +18,4 @@ adalah link ke halaman yang menyediakan berbagai sumber API yang bisa kamu manfa
 
 ## API
 
-https://rapidapi.com/collection/hotels-apis
+https://app.impala.travel/
