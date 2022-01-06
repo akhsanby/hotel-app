@@ -1,31 +1,19 @@
 import React from "react";
-import { Text, View, Image, Pressable } from "react-native";
+import { Text, View, Image } from "react-native";
 
 // styles
 import styles from "./styles";
 
-export default function MediumCard({ navigation }) {
-  const handleNavigateToDetail = () => {
-    return navigation.navigate("Detail");
-  };
+export default function MediumCard({ img, text }) {
 
   return (
-    <Pressable onPress={handleNavigateToDetail}>
-      {({ pressed }) => (
-        <View style={styles.card}>
-          <Image
-            style={styles.image}
-            source={{
-              uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
-            }}
-          />
-          <View style={styles.card_body}>
-            <Text style={styles.card_title} numberOfLines={2}>
-              Lorem ipsum dolor sit amet consectetur.
-            </Text>
-          </View>
-        </View>
-      )}
-    </Pressable>
+    <View style={styles.card}>
+      <Image style={styles.image} source={img} />
+      <View style={styles.card_body}>
+        <Text style={styles.card_title} numberOfLines={2}>
+          {text}
+        </Text>
+      </View>
+    </View>
   );
 }
