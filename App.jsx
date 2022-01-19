@@ -4,6 +4,10 @@ import Router from "./src/router";
 import AppLoading from "expo-app-loading";
 import { useFonts } from "expo-font";
 
+// redux
+import { store } from "./src/redux/store";
+import { Provider } from "react-redux";
+
 // utils
 import { color } from "./src/utils";
 
@@ -28,9 +32,11 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer theme={MyTheme}>
-      <Router />
-      <StatusBar style="light" />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer theme={MyTheme}>
+        <Router />
+        <StatusBar style="light" />
+      </NavigationContainer>
+    </Provider>
   );
 }

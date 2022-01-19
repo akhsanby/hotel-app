@@ -1,6 +1,9 @@
 import React from "react";
 import { View, ScrollView } from "react-native";
 
+// redux
+import { useSelector } from "react-redux";
+
 // components
 import Layout from "../../components/Layout";
 import SmallCard from "../../components/SmallCard";
@@ -9,11 +12,13 @@ import SmallCard from "../../components/SmallCard";
 import styles from "./styles";
 
 export default function History({ navigation }) {
+  const userDataHistory = useSelector((state) => state.user.userData.history);
+
   return (
     <Layout>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {[1, 2, 3, 4, 5, 6].map((index) => (
-          <SmallCard key={index} navigation={navigation} />
+        {userDataHistory.map((hotel, index) => (
+          <SmallCard key={index} navigation={navigation} hotel={hotel} />
         ))}
       </ScrollView>
     </Layout>

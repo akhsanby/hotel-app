@@ -1,6 +1,9 @@
 import React, { Fragment } from "react";
 import { Text, ScrollView } from "react-native";
 
+// redux
+import { useSelector } from "react-redux";
+
 // components
 import Layout from "../../components/Layout";
 import SearchForm from "../../components/SearchForm";
@@ -11,10 +14,12 @@ import Gap from "../../components/Gap";
 import styles from "./styles";
 
 export default function Home({ navigation }) {
+  const getDataHotel = useSelector((state) => state.hotel?.data);
+
   return (
     <Layout flex={1}>
       <Gap height={40} />
-      <SearchForm />
+      <SearchForm navigation={navigation} />
       <Gap height={20} />
       <ScrollView showsVerticalScrollIndicator={false}>
         <Text style={styles.heading}>
@@ -22,18 +27,18 @@ export default function Home({ navigation }) {
         </Text>
         <Text style={styles.subheading}>Top Destination</Text>
         <ScrollView horizontal={true}>
-          {[1, 2, 3, 4, 5].map((index) => (
-            <Fragment key={index}>
-              <MediumCard navigation={navigation} />
+          {getDataHotel?.slice(1, 5).map((hotel) => (
+            <Fragment key={hotel.hotelId}>
+              <MediumCard navigation={navigation} hotel={hotel} />
               <Gap width={10} />
             </Fragment>
           ))}
         </ScrollView>
         <Text style={styles.subheading}>Popular Destination</Text>
         <ScrollView horizontal={true}>
-          {[1, 2, 3, 4, 5].map((index) => (
-            <Fragment key={index}>
-              <MediumCard navigation={navigation} />
+          {getDataHotel?.slice(5, 10).map((hotel) => (
+            <Fragment key={hotel.hotelId}>
+              <MediumCard navigation={navigation} hotel={hotel} />
               <Gap width={10} />
             </Fragment>
           ))}

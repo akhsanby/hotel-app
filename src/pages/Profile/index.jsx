@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View, Pressable } from "react-native";
+
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { setUserIsLoggedIn } from "../../redux/userSlice";
 
 // components
 import Layout from "../../components/Layout";
@@ -15,13 +19,14 @@ import { color, windowWidth } from "../../utils";
 import styles from "./styles";
 
 export default function Profile({ navigation }) {
-  const [accountData, setAccountData] = React.useState([
-    { type: "First Name", value: "Akhsan" },
-    { type: "Last Name", value: "Bayu" },
-    { type: "Email", value: "loram@gmail.com" },
-    { type: "Address", value: "Lorem" },
-    { type: "Gender", value: "Male" },
-  ]);
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+
+  const accountData = [
+    { type: "Username", value: userData.userProfile?.fullname },
+    { type: "Email", value: userData.userProfile?.email },
+    { type: "Address", value: userData.userProfile?.address },
+  ];
 
   const handleRedirectToEditProfilePage = () => {
     return navigation.navigate("EditProfile");
@@ -31,47 +36,57 @@ export default function Profile({ navigation }) {
     return navigation.navigate("Login");
   };
 
-  const handleRedirectToRegisterPage = () => {
-    return navigation.navigate("Register");
-  };
+  function handleLogout() {
+    dispatch(setUserIsLoggedIn(false));
+    return navigation.navigate("Splash");
+  }
 
   return (
     <Layout>
-      <View style={styles.title_container}>
-        <Text style={styles.card_title}>My Account</Text>
-        <Pressable onPress={handleRedirectToEditProfilePage}>
-          {({ pressed }) => (
-            <AntDesign
-              name="edit"
-              size={windowWidth * 0.07}
-              color={pressed ? color.red : color.whitePrimary}
-            />
-          )}
-        </Pressable>
-      </View>
-      {accountData.map((item, index) => (
-        <View key={index} style={styles.account_data}>
-          <Text
-            style={{ color: color.whitePrimary, fontFamily: "Outfit-Regular" }}
+      {userData.loggedIn ? (
+        <>
+          <View style={styles.title_container}>
+            <Text style={styles.card_title}>My Account</Text>
+            <Pressable onPress={handleRedirectToEditProfilePage}>
+              {({ pressed }) => (
+                <AntDesign
+                  name="edit"
+                  size={windowWidth * 0.07}
+                  color={pressed ? color.red : color.whitePrimary}
+                />
+              )}
+            </Pressable>
+          </View>
+          {accountData.map((item, index) => (
+            <View key={index} style={styles.account_data}>
+              <Text
+                style={{
+                  color: color.whitePrimary,
+                  fontFamily: "Outfit-Regular",
+                }}
+              >
+                {item.type}
+              </Text>
+              <Text
+                style={{
+                  color: color.whitePrimary,
+                  fontFamily: "Outfit-Regular",
+                }}
+              >
+                {item.value}
+              </Text>
+            </View>
+          ))}
+          <Pressable
+            style={({ pressed }) => styles.logout(pressed)}
+            onPress={handleLogout}
           >
-            {item.type}
-          </Text>
-          <Text
-            style={{ color: color.whitePrimary, fontFamily: "Outfit-Regular" }}
-          >
-            {item.value}
-          </Text>
-        </View>
-      ))}
-      {/* show logout button if user is logged */}
-      <Pressable style={({ pressed }) => styles.logout(pressed)}>
-        {({ pressed }) => (
-          <Text style={styles.text_logout(pressed)}>Logout</Text>
-        )}
-      </Pressable>
-
-      {/* show button login & register if user is not logged*/}
-      <View style={{ flexDirection: "row" }}>
+            {({ pressed }) => (
+              <Text style={styles.text_logout(pressed)}>Logout</Text>
+            )}
+          </Pressable>
+        </>
+      ) : (
         <Pressable
           style={({ pressed }) => styles.login(pressed)}
           onPress={handleRedirectToLoginPage}
@@ -80,16 +95,7 @@ export default function Profile({ navigation }) {
             <Text style={styles.text_login(pressed)}>Login</Text>
           )}
         </Pressable>
-        <Gap width={10} />
-        <Pressable
-          style={({ pressed }) => styles.register(pressed)}
-          onPress={handleRedirectToRegisterPage}
-        >
-          {({ pressed }) => (
-            <Text style={styles.text_register(pressed)}>Register</Text>
-          )}
-        </Pressable>
-      </View>
+      )}
     </Layout>
   );
 }

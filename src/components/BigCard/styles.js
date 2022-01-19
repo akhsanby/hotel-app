@@ -31,9 +31,8 @@ const styles = StyleSheet.create({
   },
   card_title: {
     color: color.whitePrimary,
-    fontSize: windowWidth * 0.05,
+    fontSize: windowWidth * 0.04,
     fontFamily: "Outfit-Bold",
-    textAlign: "center",
   },
   card_subtitle: {
     color: color.whitePrimary,

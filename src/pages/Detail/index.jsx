@@ -1,13 +1,16 @@
 import React, { Fragment } from "react";
 import { Text, View, Image, Pressable, ScrollView } from "react-native";
 
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { saveToFavourite } from "../../redux/userSlice";
+
 // components
 import Layout from "../../components/Layout";
 import Gap from "../../components/Gap";
 
 // icons
 import { AntDesign } from "@expo/vector-icons";
-import { FontAwesome5 } from "@expo/vector-icons";
 
 // utils
 import { color, windowWidth } from "../../utils";
@@ -15,37 +18,76 @@ import { color, windowWidth } from "../../utils";
 // styles
 import styles from "./styles";
 
-export default function Detail({ navigation }) {
-  const facilities = [
-    { text: "Parking", nameIcon: "parking" },
-    { text: "Wifi", nameIcon: "wifi" },
-    { text: "Food", nameIcon: "utensils" },
-    { text: "24 h support", nameIcon: "headset" },
-  ];
+export default function Detail({ route, navigation }) {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+  const { hotel } = route.params;
+
+  const rating = () => {
+    if (hotel?.starRating === 1) return [1];
+    if (hotel?.starRating === 2) return [1, 2];
+    if (hotel?.starRating === 3) return [1, 2, 3];
+    if (hotel?.starRating === 4) return [1, 2, 3, 4];
+    if (hotel?.starRating === 5) return [1, 2, 3, 4, 5];
+  };
+
+  const ShowIconFavouriteOrUnFavourite = () => {
+    const result = userData.favourite.some(
+      (item) => item.hotel.hotelId === hotel.hotelId
+    );
+    if (result)
+      return (
+        <AntDesign name="heart" size={windowWidth * 0.1} color={color.red} />
+      );
+    if (!result)
+      return (
+        <AntDesign name="hearto" size={windowWidth * 0.1} color={color.red} />
+      );
+  };
 
   const handleRedirectToBookingPage = () => {
-    return navigation.navigate("Booking");
+    if (userData.loggedIn) {
+      return navigation.navigate("Booking", { hotel });
+    } else {
+      return navigation.navigate("Login");
+    }
   };
+
+  function handleAddFavourite() {
+    return dispatch(saveToFavourite({ hotel }));
+  }
 
   return (
     <Fragment>
       <Image
         style={styles.image}
         source={{
-          uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
+          uri:
+            `${hotel?.images[0].url}` ||
+            "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
         }}
       />
       <ScrollView>
         <Layout>
           {/* section hotel name */}
           <View>
-            <Text style={styles.title}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Consectetur.
-            </Text>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <Text style={styles.title}>{hotel?.name}</Text>
+              {userData.loggedIn && (
+                <Pressable onPress={handleAddFavourite}>
+                  <ShowIconFavouriteOrUnFavourite />
+                </Pressable>
+              )}
+            </View>
             <Gap height={13} />
             <View style={styles.icon_star_wrapper}>
-              {[1, 2, 3, 4, 5].map((index) => (
+              {rating().map((index) => (
                 <AntDesign
                   key={index}
                   name="star"
@@ -55,7 +97,6 @@ export default function Detail({ navigation }) {
               ))}
             </View>
             <Gap height={9} />
-            <Text style={styles.text_price}>$ 290 / night</Text>
           </View>
           {/* end section hotel name */}
 
@@ -64,12 +105,7 @@ export default function Detail({ navigation }) {
           {/* section about place */}
           <View>
             <Text style={styles.subtitle}>About Place</Text>
-            <Text style={styles.description}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo
-              optio, eaque sint eligendi sed inventore neque ut doloribus porro
-              reprehenderit maiores eveniet nobis! Illum impedit molestias
-              adipisci cum alias odio.
-            </Text>
+            <Text style={styles.description}>{hotel?.description.short}</Text>
           </View>
           {/* end section about place */}
 
@@ -78,16 +114,10 @@ export default function Detail({ navigation }) {
           {/* section facilities */}
           <View>
             <Text style={styles.subtitle}>Facilities</Text>
-            <ScrollView horizontal={true}>
-              {facilities.map((item, index) => (
+            <ScrollView>
+              {hotel?.amenities.map((item, index) => (
                 <View style={styles.icon_facility_wrapper} key={index}>
-                  <FontAwesome5
-                    name={item.nameIcon}
-                    size={24}
-                    color={color.red}
-                  />
-                  <Gap width={5} />
-                  <Text style={styles.text_facility}>{item.text}</Text>
+                  <Text style={styles.text_facility}>{item.formatted}</Text>
                   <Gap width={15} />
                 </View>
               ))}

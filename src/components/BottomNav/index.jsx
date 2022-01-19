@@ -2,12 +2,17 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import TabItem from "../TabItem";
 
+// redux
+import { useSelector } from "react-redux";
+
 // utils
 import { color } from "../../utils";
 
 export default function BottomNav({ state, descriptors, navigation }) {
+  const userData = useSelector((state) => state.user.userData);
+
   return (
-    <View style={styles.container}>
+    <View style={styles.container(userData)}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -54,11 +59,11 @@ export default function BottomNav({ state, descriptors, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container: (userData) => ({
     flexDirection: "row",
     backgroundColor: color.blackSecondary,
-    justifyContent: "space-between",
+    justifyContent: userData.loggedIn ? "space-between" : "space-evenly",
     paddingHorizontal: 30,
     paddingVertical: 10,
-  },
+  }),
 });

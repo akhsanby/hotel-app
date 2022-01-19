@@ -2,6 +2,9 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+// redux
+import { useSelector } from "react-redux";
+
 // utils
 import { color } from "../utils";
 
@@ -23,51 +26,6 @@ import BottomNav from "../components/BottomNav";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const TabScreens = [
-  { name: "Home", component: HomeScreen, options: { headerShown: false } },
-  {
-    name: "Favourite",
-    component: FavouriteScreen,
-    options: {
-      title: "My Favourite",
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-  {
-    name: "History",
-    component: HistoryScreen,
-    options: {
-      title: "History Booking",
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-  {
-    name: "Profile",
-    component: ProfileScreen,
-    options: {
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-];
 
 const StackScreen = [
   {
@@ -140,16 +98,62 @@ const StackScreen = [
 ];
 
 function MainApp() {
+  const userData = useSelector((state) => state.user.userData);
+
   return (
     <Tab.Navigator tabBar={(props) => <BottomNav {...props} />}>
-      {TabScreens.map((screen, index) => (
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+      {userData.loggedIn && (
         <Tab.Screen
-          key={index}
-          name={screen.name}
-          component={screen.component}
-          options={screen.options}
+          name="Favourite"
+          component={FavouriteScreen}
+          options={{
+            title: "My Favourite",
+            headerStyle: {
+              backgroundColor: color.blackSecondary,
+            },
+            headerTitleStyle: {
+              fontFamily: "Outfit-Bold",
+            },
+            headerTintColor: color.whitePrimary,
+          }}
         />
-      ))}
+      )}
+      {userData.loggedIn && (
+        <Tab.Screen
+          name="History"
+          component={HistoryScreen}
+          options={{
+            title: "History Booking",
+            headerStyle: {
+              backgroundColor: color.blackSecondary,
+            },
+            headerTitleStyle: {
+              fontFamily: "Outfit-Bold",
+            },
+            headerTintColor: color.whitePrimary,
+          }}
+        />
+      )}
+      <Tab.Screen
+        name="Profile"
+        component={ProfileScreen}
+        options={{
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
     </Tab.Navigator>
   );
 }
