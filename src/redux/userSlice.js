@@ -5,7 +5,7 @@ const initialState = {
     username: "user",
     email: "user@gmail.com",
     password: "user123",
-    loggedIn: true,
+    loggedIn: false,
     favourite: [],
     history: [],
     userProfile: {
