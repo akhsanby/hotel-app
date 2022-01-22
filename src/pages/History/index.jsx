@@ -1,5 +1,5 @@
 import React from "react";
-import { View, ScrollView } from "react-native";
+import { View, ScrollView, Text } from "react-native";
 
 // redux
 import { useSelector } from "react-redux";
@@ -12,14 +12,19 @@ import SmallCard from "../../components/SmallCard";
 import styles from "./styles";
 
 export default function History({ navigation }) {
+  const userData = useSelector((state) => state.user.userData);
   const userDataHistory = useSelector((state) => state.user.userData.history);
 
   return (
     <Layout>
       <ScrollView showsVerticalScrollIndicator={false}>
-        {userDataHistory.map((hotel, index) => (
-          <SmallCard key={index} navigation={navigation} hotel={hotel} />
-        ))}
+        {userData.loggedIn ? (
+          userDataHistory.map((hotel, index) => (
+            <SmallCard key={index} navigation={navigation} hotel={hotel} />
+          ))
+        ) : (
+          <Text style={styles.text_not_login}>You must login first!</Text>
+        )}
       </ScrollView>
     </Layout>
   );

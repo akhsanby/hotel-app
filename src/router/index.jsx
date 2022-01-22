@@ -14,7 +14,6 @@ import HomeScreen from "../pages/Home";
 import DetailScreen from "../pages/Detail";
 import SearchScreen from "../pages/Search";
 import LoginScreen from "../pages/Login";
-import RegisterScreen from "../pages/Register";
 import BookingScreen from "../pages/Booking";
 import FavouriteScreen from "../pages/Favourite";
 import HistoryScreen from "../pages/History";
@@ -58,11 +57,6 @@ const StackScreen = [
     options: { headerShown: false },
   },
   {
-    name: "Register",
-    component: RegisterScreen,
-    options: { headerShown: false },
-  },
-  {
     name: "EditProfile",
     component: EditProfileScreen,
     options: {
@@ -98,8 +92,6 @@ const StackScreen = [
 ];
 
 function MainApp() {
-  const userData = useSelector((state) => state.user.userData);
-
   return (
     <Tab.Navigator tabBar={(props) => <BottomNav {...props} />}>
       <Tab.Screen
@@ -109,38 +101,34 @@ function MainApp() {
           headerShown: false,
         }}
       />
-      {userData.loggedIn && (
-        <Tab.Screen
-          name="Favourite"
-          component={FavouriteScreen}
-          options={{
-            title: "My Favourite",
-            headerStyle: {
-              backgroundColor: color.blackSecondary,
-            },
-            headerTitleStyle: {
-              fontFamily: "Outfit-Bold",
-            },
-            headerTintColor: color.whitePrimary,
-          }}
-        />
-      )}
-      {userData.loggedIn && (
-        <Tab.Screen
-          name="History"
-          component={HistoryScreen}
-          options={{
-            title: "History Booking",
-            headerStyle: {
-              backgroundColor: color.blackSecondary,
-            },
-            headerTitleStyle: {
-              fontFamily: "Outfit-Bold",
-            },
-            headerTintColor: color.whitePrimary,
-          }}
-        />
-      )}
+      <Tab.Screen
+        name="Favourite"
+        component={FavouriteScreen}
+        options={{
+          title: "My Favourite",
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
+      <Tab.Screen
+        name="History"
+        component={HistoryScreen}
+        options={{
+          title: "History Booking",
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
       <Tab.Screen
         name="Profile"
         component={ProfileScreen}

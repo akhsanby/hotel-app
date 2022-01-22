@@ -33,7 +33,7 @@ export default function Login() {
   function handleLogin() {
     if (userData.email === email && userData.password === password) {
       dispatch(setUserIsLoggedIn(true));
-      return navigation.navigate("Splash");
+      return navigation.goBack();
     } else {
       showAlert();
     }

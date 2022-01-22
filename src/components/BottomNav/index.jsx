@@ -9,10 +9,8 @@ import { useSelector } from "react-redux";
 import { color } from "../../utils";
 
 export default function BottomNav({ state, descriptors, navigation }) {
-  const userData = useSelector((state) => state.user.userData);
-
   return (
-    <View style={styles.container(userData)}>
+    <View style={styles.container}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
         const label =
@@ -59,11 +57,11 @@ export default function BottomNav({ state, descriptors, navigation }) {
 }
 
 const styles = StyleSheet.create({
-  container: (userData) => ({
+  container: {
     flexDirection: "row",
     backgroundColor: color.blackSecondary,
-    justifyContent: userData.loggedIn ? "space-between" : "space-evenly",
+    justifyContent: "space-between",
     paddingHorizontal: 30,
     paddingVertical: 10,
-  }),
+  },
 });
