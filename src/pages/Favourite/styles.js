@@ -10,6 +10,13 @@ const styles = StyleSheet.create({
   list_container: {
     marginVertical: windowHeight * 0.02,
   },
+  text_not_login: {
+    color: color.whitePrimary,
+    fontFamily: "Outfit-Bold",
+    fontSize: windowWidth * 0.05,
+    textAlign: "center",
+    marginTop: windowHeight * 0.05,
+  },
 });
 
 export default styles;

@@ -1,7 +1,11 @@
 import React from "react";
-import { View, Text, Pressable, TextInput } from "react-native";
+import { View, Text, Pressable, TextInput, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import Svg, { Path } from "react-native-svg";
+
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import { setUserIsLoggedIn } from "../../redux/userSlice";
 
 // components
 import Layout from "../../components/Layout";
@@ -17,13 +21,23 @@ import { color, windowWidth, windowHeight } from "../../utils";
 import styles from "./styles";
 
 export default function Login() {
+  const dispatch = useDispatch();
+  const userData = useSelector((state) => state.user.userData);
+
   const navigation = useNavigation();
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
 
-  const handleRedirectToRegisterPage = () => {
-    return navigation.navigate("Register");
-  };
+  const showAlert = () => Alert.alert("Wrong email or password!");
+
+  function handleLogin() {
+    if (userData.email === email && userData.password === password) {
+      dispatch(setUserIsLoggedIn(true));
+      return navigation.goBack();
+    } else {
+      showAlert();
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -65,7 +79,10 @@ export default function Login() {
           secureTextEntry={true}
         />
         <Gap height={10} />
-        <Pressable style={({ pressed }) => styles.btn_login(pressed)}>
+        <Pressable
+          style={({ pressed }) => styles.btn_login(pressed)}
+          onPress={handleLogin}
+        >
           <AntDesign
             name="login"
             size={windowWidth * 0.06}
@@ -74,13 +91,6 @@ export default function Login() {
           <Gap width={10} />
           <Text style={styles.text_btn_login}>Login</Text>
         </Pressable>
-        <Gap height={10} />
-        <Text
-          onPress={handleRedirectToRegisterPage}
-          style={{ color: color.whitePrimary, textAlign: "center" }}
-        >
-          Click here to Register
-        </Text>
       </View>
     </View>
   );

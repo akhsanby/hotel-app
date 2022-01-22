@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     color: pressed ? color.red : color.whitePrimary,
   }),
   login: (pressed) => ({
-    flex: 1,
     paddingVertical: windowHeight * 0.02,
     borderWidth: 2,
     borderColor: pressed ? color.red : color.whitePrimary,

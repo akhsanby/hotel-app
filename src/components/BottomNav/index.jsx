@@ -2,6 +2,9 @@ import React from "react";
 import { View, StyleSheet } from "react-native";
 import TabItem from "../TabItem";
 
+// redux
+import { useSelector } from "react-redux";
+
 // utils
 import { color } from "../../utils";
 

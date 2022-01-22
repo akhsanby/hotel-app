@@ -1,14 +1,9 @@
 import { StyleSheet } from "react-native";
 
 // utils
-import { color, windowHeight, windowWidth } from "../../utils";
+import { color, windowWidth } from "../../utils";
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: color.blackPrimary,
-    flex: 1,
-    paddingHorizontal: 30,
-  },
   heading: {
     color: color.whitePrimary,
     marginBottom: 30,

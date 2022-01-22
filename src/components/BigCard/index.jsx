@@ -1,55 +1,62 @@
 import React from "react";
 import { Text, View, Image, Pressable } from "react-native";
+import { useNavigation } from "@react-navigation/native";
+
+// components
+import Gap from "../Gap";
 
 // icons
 import { AntDesign } from "@expo/vector-icons";
 
 // utils
-import { color, windowHeight, windowWidth } from "../../utils";
+import { color, windowWidth } from "../../utils";
 
 // styles
 import styles from "./styles";
 
-export default function BigCard({ navigation }) {
+export default function BigCard({ hotel }) {
+  const navigation = useNavigation();
+
+  const rating = () => {
+    if (hotel?.starRating === 1) return [1];
+    if (hotel?.starRating === 2) return [1, 2];
+    if (hotel?.starRating === 3) return [1, 2, 3];
+    if (hotel?.starRating === 4) return [1, 2, 3, 4];
+    if (hotel?.starRating === 5) return [1, 2, 3, 4, 5];
+  };
+
   const handleNavigateToDetail = () => {
-    return navigation.navigate("Detail");
+    return navigation.navigate("Detail", { hotel });
   };
 
   return (
     <Pressable onPress={handleNavigateToDetail}>
       <View style={styles.card}>
-        <View style={{ position: "relative" }}>
-          <Pressable style={styles.fav_icon}>
-            <AntDesign
-              name="heart"
-              size={windowWidth * 0.07}
-              color={color.red}
-            />
-          </Pressable>
+        <View>
           <Image
             style={styles.image}
             source={{
-              uri: "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
+              uri:
+                `${hotel?.images[0].url}` ||
+                "https://raw.githubusercontent.com/akhsanby/nft-card/main/images/image-equilibrium.jpg",
             }}
           />
         </View>
         <View style={styles.card_body}>
           <View>
-            <Text style={styles.card_title}>Lorem, ipsum.</Text>
+            <Gap height={5} />
+            <Text style={styles.card_title}>{hotel?.name}</Text>
+            <Gap height={10} />
             <View style={styles.icons}>
-              {[1, 2, 3, 4, 5].map((index) => (
+              {rating().map((index) => (
                 <AntDesign
                   key={index}
                   name="star"
-                  size={windowWidth * 0.04}
+                  size={windowWidth * 0.05}
                   color={color.orange}
                 />
               ))}
             </View>
-          </View>
-          <View>
-            <Text style={styles.card_title}>$ 249</Text>
-            <Text style={styles.card_subtitle}>/ night</Text>
           </View>
         </View>
       </View>

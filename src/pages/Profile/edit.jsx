@@ -1,5 +1,13 @@
-import React, { Fragment } from "react";
+import React, { useState } from "react";
 import { Text, View, Pressable, TextInput } from "react-native";
+
+// redux
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setUserProfileFullname,
+  setUserProfileEmail,
+  setUserProfileAddress,
+} from "../../redux/userSlice";
 
 // components
 import Layout from "../../components/Layout";
@@ -12,56 +20,39 @@ import { color, windowWidth } from "../../utils";
 import styles from "./styles";
 
 export default function EditProfile({ navigation }) {
-  const [profile, setProfile] = React.useState([
-    { type: "First Name", placeholder: "Akhsan" },
-    { type: "Last Name", placeholder: "Bayu" },
-    { type: "Email", placeholder: "loram@gmail.com" },
-    { type: "Address", placeholder: "Gunung gede" },
-  ]);
-
-  const [gender, setGender] = React.useState("");
-
-  const handleRedirectBackToProfile = () => {
-    return navigation.navigate("Profile");
-  };
+  const dispatch = useDispatch();
+  const getUserProfileFromState = useSelector(
+    (state) => state.user.userData.userProfile
+  );
 
   return (
     <Layout>
-      {profile.map((item, index) => (
-        <Fragment key={index}>
-          <Text style={styles.label}>{item.type}</Text>
-          <TextInput
-            style={styles.input}
-            placeholder={item.placeholder}
-            placeholderTextColor={color.whiteSecondary}
-          />
-          <Gap height={15} />
-        </Fragment>
-      ))}
-      <Text style={styles.label}>Gender</Text>
+      <Text style={styles.label}>Fullname</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Your fullname"
+        placeholderTextColor={color.whiteSecondary}
+        onChangeText={(text) => dispatch(setUserProfileFullname(text))}
+        value={getUserProfileFromState.fullname}
+      />
       <Gap height={10} />
-      <View style={{ flexDirection: "row" }}>
-        <Pressable
-          style={styles.btn_gender_male(gender)}
-          onPress={() => setGender("Male")}
-        >
-          <Text style={styles.label}>Male</Text>
-        </Pressable>
-        <Gap width={10} />
-        <Pressable
-          style={styles.btn_gender_female(gender)}
-          onPress={() => setGender("Female")}
-        >
-          <Text style={styles.label}>Female</Text>
-        </Pressable>
-      </View>
-      <Gap height={20} />
-      <Pressable
-        style={({ pressed }) => styles.btn_save(pressed)}
-        onPress={handleRedirectBackToProfile}
-      >
-        {({ pressed }) => <Text style={styles.label_save(pressed)}>Save</Text>}
-      </Pressable>
+      <Text style={styles.label}>Email</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="example@gmail.com"
+        placeholderTextColor={color.whiteSecondary}
+        onChangeText={(text) => dispatch(setUserProfileEmail(text))}
+        value={getUserProfileFromState.email}
+      />
+      <Gap height={10} />
+      <Text style={styles.label}>Address</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Somewhere"
+        placeholderTextColor={color.whiteSecondary}
+        onChangeText={(text) => dispatch(setUserProfileAddress(text))}
+        value={getUserProfileFromState.address}
+      />
     </Layout>
   );
 }
