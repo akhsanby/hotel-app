@@ -2,9 +2,6 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-// redux
-import { useSelector } from "react-redux";
-
 // utils
 import { color } from "../utils";
 
@@ -25,71 +22,6 @@ import BottomNav from "../components/BottomNav";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
-
-const StackScreen = [
-  {
-    name: "Splash",
-    component: SplashScreen,
-    options: { headerShown: false },
-  },
-  {
-    name: "Search",
-    component: SearchScreen,
-    options: { headerShown: false },
-  },
-  {
-    name: "Detail",
-    component: DetailScreen,
-    options: {
-      title: "Detail Hotel",
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-  {
-    name: "Login",
-    component: LoginScreen,
-    options: { headerShown: false },
-  },
-  {
-    name: "EditProfile",
-    component: EditProfileScreen,
-    options: {
-      title: "Edit Profile",
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-  {
-    name: "Booking",
-    component: BookingScreen,
-    options: {
-      title: "Booking Now",
-      headerStyle: {
-        backgroundColor: color.blackSecondary,
-      },
-      headerTitleStyle: {
-        fontFamily: "Outfit-Bold",
-      },
-      headerTintColor: color.whitePrimary,
-    },
-  },
-  {
-    name: "MainApp",
-    component: MainApp,
-    options: { headerShown: false },
-  },
-];
 
 function MainApp() {
   return (
@@ -149,14 +81,68 @@ function MainApp() {
 export default function Router() {
   return (
     <Stack.Navigator initialRouteName="Splash">
-      {StackScreen.map((screen, index) => (
-        <Stack.Screen
-          key={index}
-          name={screen.name}
-          component={screen.component}
-          options={screen.options}
-        />
-      ))}
+      <Stack.Screen
+        name="Splash"
+        component={SplashScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Search"
+        component={SearchScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="Detail"
+        component={DetailScreen}
+        options={{
+          title: "Detail Hotel",
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={LoginScreen}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="EditProfile"
+        component={EditProfileScreen}
+        options={{
+          title: "Edit Profile",
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
+      <Stack.Screen
+        name="Booking"
+        component={BookingScreen}
+        options={{
+          title: "Booking Now",
+          headerStyle: {
+            backgroundColor: color.blackSecondary,
+          },
+          headerTitleStyle: {
+            fontFamily: "Outfit-Bold",
+          },
+          headerTintColor: color.whitePrimary,
+        }}
+      />
+      <Stack.Screen
+        name="MainApp"
+        component={MainApp}
+        options={{ headerShown: false }}
+      />
     </Stack.Navigator>
   );
 }
